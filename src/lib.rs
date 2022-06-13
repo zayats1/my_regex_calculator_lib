@@ -1,5 +1,3 @@
-
-
 pub mod my_regex_calculator_lib {
     use lazy_static::lazy_static;
     use regex::Regex;
@@ -53,9 +51,6 @@ pub mod my_regex_calculator_lib {
     }
 
 
-
-
-
     fn parse_string(input: String) -> Vec<String> {
         /*
             find double
@@ -76,7 +71,6 @@ pub mod my_regex_calculator_lib {
             .filter_map(|digits| digits.as_str().parse().ok())
             .collect()
     }
-
 
 
     fn math_operation(op: &str, num1: f64, num2: f64) -> f64 {
@@ -102,19 +96,5 @@ pub mod my_regex_calculator_lib {
                 0.0
             }
         }
-    }
-
-}
-
-
-#[cfg(test)]
-mod tests {
-    use crate::my_regex_calculator_lib::calculate;
-
-    #[test]
-    fn it_works() {
-        let my_data: String = "5 * (5 * (1 + 2)) - 5 * 5 + (5 + 5) / 5  - (-1.5)".parse().unwrap();
-        let result = calculate(my_data);
-        assert_eq!(result, "53.5");
     }
 }
