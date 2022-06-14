@@ -28,7 +28,7 @@ pub mod my_regex_calculator_lib {
                 let previous = i - 1;
                 let next = i + 1;
 
-                if data[i] == op.to_string() {
+                if data[i] == str::to_string(op) {
                     let num1 = data[previous].parse::<f64>();
                     let num2 = data[next].parse::<f64>();
 
