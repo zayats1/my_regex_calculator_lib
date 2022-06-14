@@ -1,6 +1,6 @@
 #[cfg(test)]
 mod tests {
-    use my_regex_calculator_lib::my_regex_calculator_lib::calculate;
+    use my_regex_calculator_lib::calculate;
 
     #[test]
     fn it_works() {

@@ -1,3 +1,4 @@
+pub use self::my_regex_calculator_lib::calculate;
 pub mod my_regex_calculator_lib {
     use lazy_static::lazy_static;
     use regex::Regex;
