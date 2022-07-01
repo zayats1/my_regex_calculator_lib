@@ -1,7 +1,7 @@
 pub use self::my_regex_calculator_lib::calculate;
 pub mod my_regex_calculator_lib {
     use lazy_static::lazy_static;
-    use regex::Regex;
+    use regex:: Regex;
 
     pub fn calculate(input: String) -> String {
         let mut data = parse_string(input);
@@ -9,7 +9,7 @@ pub mod my_regex_calculator_lib {
 
         // deep expressions  in parentheses
         for s in &mut data {
-            if s.chars().count() > 5 {
+            if s.chars().count() > 5{
                 let mut expression = s.clone();
                 expression.remove(0);
                 expression.pop();
@@ -28,7 +28,7 @@ pub mod my_regex_calculator_lib {
                 let previous = i - 1;
                 let next = i + 1;
 
-                if data[i] == op.to_string() {
+                if data[i] == str::to_string(op) {
                     let num1 = data[previous].parse::<f64>();
                     let num2 = data[next].parse::<f64>();
 
@@ -39,10 +39,15 @@ pub mod my_regex_calculator_lib {
                     let num1 = num1.unwrap();
                     let num2 = num2.unwrap();
 
-                    let calc_result = math_operation(op, num1, num2);
+                    let calc_result = match math_operation(op, num1, num2){
+                        Ok(_) => math_operation(op, num1, num2).ok(),
+                        Err(e) => {
+                            return e
+                        }
+                    };
 
                     data.remove(next);
-                    data[i] = calc_result.to_string();
+                    data[i] = calc_result.unwrap().to_string();
                     data.remove(previous);
                 }
             }
@@ -74,31 +79,27 @@ pub mod my_regex_calculator_lib {
     }
 
 
-    fn math_operation(op: &str, num1: f64, num2: f64) -> f64 {
+    fn math_operation(op: &str, num1: f64, num2: f64) -> Result<f64, String> {
         match op {
             "*" => {
-                num1 * num2
+               Ok(num1 * num2)
             }
             "/" => {
                 if num2 != 0.0 {
-                    num1 / num2
+                  Ok(num1 / num2)
                 } else {
-                    panic!("division by zero");
+                    Err("Division by zero".to_string())
                 }
             }
             "+" => {
-                num1 + num2
+                Ok(num1 + num2)
             }
             "-" => {
-                num1 - num2
+                Ok(num1 - num2)
             }
 
             _ => {
-<<<<<<< HEAD
-                Err("Unimplemented operator")
-=======
-                0.0
->>>>>>> parent of 10161e2 (d)
+                Err("Unimplemented operator".to_string())
             }
         }
     }
