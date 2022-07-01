@@ -94,7 +94,7 @@ pub mod my_regex_calculator_lib {
             }
 
             _ => {
-                Err("Un operator")
+                Err("Unimplemented operator")
             }
         }
     }
