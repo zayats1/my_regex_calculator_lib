@@ -1,7 +1,7 @@
 pub use self::my_regex_calculator_lib::calculate;
 pub mod my_regex_calculator_lib {
     use lazy_static::lazy_static;
-    use regex::Regex;
+    use regex::{Error, Regex};
 
     pub fn calculate(input: String) -> String {
         let mut data = parse_string(input);
@@ -74,27 +74,27 @@ pub mod my_regex_calculator_lib {
     }
 
 
-    fn math_operation(op: &str, num1: f64, num2: f64) -> f64 {
+    fn math_operation(op: &str, num1: f64, num2: f64) -> Result<f64, _> {
         match op {
             "*" => {
-                num1 * num2
+               Ok(num1 * num2)
             }
             "/" => {
                 if num2 != 0.0 {
-                    num1 / num2
+                  Ok(num1 / num2)
                 } else {
-                    panic!("division by zero");
+                    Err("Division by zero")
                 }
             }
             "+" => {
-                num1 + num2
+                Ok(num1 + num2)
             }
             "-" => {
-                num1 - num2
+                Ok(num1 - num2)
             }
 
             _ => {
-                0.0
+                Err("Un operator")
             }
         }
     }
